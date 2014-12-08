@@ -38,6 +38,19 @@ public class OrderResource implements OrderService{
 		OrderActivity orderActivity = new OrderActivity();
 		return orderActivity.addOrder(bookID);
 	}*/
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/valid")
+	public Response customerAuth(@QueryParam("username") String username,
+			@QueryParam("password") String password) {
+		OrderActivity orderActivity = new OrderActivity();
+		System.out
+				.println("GET METHOD Request from Client with username & password .............");
+		if (orderActivity.authenticate(username, password) == null) {
+			return Response.status(Status.UNAUTHORIZED).build();
+		}
+		return Response.status(Status.OK).build();
+	}
 
 	@POST
 	@Consumes({MediaType.APPLICATION_JSON})
