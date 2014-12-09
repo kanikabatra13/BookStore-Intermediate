@@ -89,7 +89,7 @@ public class BookActivity {
 	 */
 	private void setLinks(BookRepresentation bookRep) {
 		// Set up the activities that can be performed on orders
-		Link buy = new Link("buy", "http://localhost:8082/orderservice/order/" + bookRep.getBookId());
+		Link buy = new Link("buy", "http://54.88.78.26/ws/orderservice/order/" + bookRep.getBookId());
 		
 		bookRep.setLinks(buy);
 	}

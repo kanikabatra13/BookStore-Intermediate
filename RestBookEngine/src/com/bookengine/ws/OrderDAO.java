@@ -17,12 +17,21 @@ public class OrderDAO {
 //		Set status = new HashSet();
 //		status.add("Ordered");
 //		order.setStatus(status);
-		Customer customer = new Customer();
-		PaymentInfo paymentinfo = new PaymentInfo();
 		
-		Order order1 = new Order("546","X1","Shipped",customer,paymentinfo);
-		Order order2= new Order("782","X2","Ordered",customer,paymentinfo);
-		Order order3= new Order("389","X3","Processed",customer,paymentinfo);
+		Customer customer1 = new Customer("John Smith", "45 East Lake View, Chicago IL", "312-312-3127",
+				"c11","john","abcd123");
+		Customer customer2 = new Customer("Andy ", "Lincoln Park, Chicago IL", "312-890-4568",
+				"c12","andy","abcd123");
+		Customer customer3 = new Customer("Ross Taylor", "34 EdgeWater, Chicago IL", "312-890-789",
+				"c23","ross","abcd123");
+		
+		
+		PaymentInfo paymentinfo1 = new PaymentInfo("AMEX","2345-7890-5678");
+		PaymentInfo paymentinfo2 = new PaymentInfo("VISA","7890-6789-4567");
+		
+		Order order1 = new Order("546","X1","Shipped",customer1,paymentinfo1);
+		Order order2= new Order("782","X2","Ordered",customer2,paymentinfo2);
+		Order order3= new Order("389","X3","Processed",customer3,paymentinfo1);
 		
 		orders.add(order1);
 		orders.add(order2);
@@ -73,31 +82,37 @@ public class OrderDAO {
 			{   
 				if(order.getStatus().equals("Shipped"))
 				{
-					return "Your Order has been Shipped it cannot be cancelled";
+					//return "Your Order has been Shipped it cannot be cancelled";
+					return null;
 				}
 				  
 				else{
 					
 			        order.setStatus("Cancelled");
-			        return "Your Order has been cancelled";
+			        return "OK";
+			       // return "Your Order has been cancelled";
 				}
 				
 		     }
 		}
 			return null;
-	}
+			}
 	
 	public String deleteOrder(String orderID) {
+		int flag = 0;
 		for (Order order : orders) {
 			if (order.getOrderID().equals(orderID))
 			{   
 				orders.remove(order);
-					return "Order has been Deleted.";
-					
-				}
-			
+				flag = 1;
+				
 			}
-		return "null";
+		}
+		if(flag == 1)
+			return "OK";
+		else
+			return null;
+		
 	}
 	
 	public Customer getCustomerInfo(String orderID) {

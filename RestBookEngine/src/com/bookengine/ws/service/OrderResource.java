@@ -24,7 +24,7 @@ import com.bookengine.ws.service.workflow.OrderActivity;
 
 @CrossOriginResourceSharing(allowAllOrigins = true)
 
-@Path("/orderservice/")
+@Path("/orderservice")
 public class OrderResource implements OrderService{
 
 	/*@POST
@@ -40,7 +40,7 @@ public class OrderResource implements OrderService{
 	}*/
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	@Path("/valid")
+	@Path("/customer")
 	public Response customerAuth(@QueryParam("username") String username,
 			@QueryParam("password") String password) {
 		OrderActivity orderActivity = new OrderActivity();
@@ -67,39 +67,54 @@ public class OrderResource implements OrderService{
 
 	@GET
 	@Produces({MediaType.APPLICATION_JSON })
-	@Path("/orderstatus/{orderId}")
-	public String getOrderStatus(@PathParam("orderId") String orderID) {
+	@Consumes({MediaType.APPLICATION_JSON})
+	@Path("/order/{orderId}")
+	public OrderRepresentation getOrder(@PathParam("orderId") String orderID) {
 		System.out.println("\nGET METHOD Request from Client to get Order Status of Order ID............."
 						+ orderID);
 		OrderActivity orderActivity = new OrderActivity();
-		return orderActivity.getOrderStatus(orderID);
+		return orderActivity.getOrder(orderID);
 		
 	}
 	
 	@PUT
 	@Produces({ MediaType.APPLICATION_JSON})
-	@Path("/ordercancel/{orderId}")
-	public String cancelOrder(@PathParam("orderId") String orderID) {
+	@Consumes({MediaType.APPLICATION_JSON})
+	@Path("/order/{orderId}")
+	public Response cancelOrder(@PathParam("orderId") String orderID) {
 		System.out.println("\nPUT METHOD Request from Client to cancel the order ............."
 						+ orderID);
 		OrderActivity orderActivity = new OrderActivity();
-		return orderActivity.cancelOrder(orderID);
+		if (orderActivity.cancelOrder(orderID) == null) {
+			return Response.status(Status.UNAUTHORIZED).build();
+		}
+		return Response.status(Status.OK).build();
+		//return orderActivity.cancelOrder(orderID);
 		
 	}
 
 	@DELETE
 	@Produces({MediaType.APPLICATION_JSON})
-	@Path("/orderdelete/{orderId}")
-	public String deleteOrder(@PathParam("orderId")String orderID) {
+	@Consumes({MediaType.APPLICATION_JSON})
+	@Path("/{orderId}")
+	public Response deleteOrder(@PathParam("orderId")String orderID) {
 		
 		System.out.println("\nDelete METHOD Request from Client to delete Order orderId............." + orderID);
 		OrderActivity ordActivity = new OrderActivity();
-		String res = ordActivity.deleteOrder(orderID);
-		if (res.equals("OK")) {
-			return "order Deleted";
+		//String res = ordActivity.deleteOrder(orderID);
+		if (ordActivity.deleteOrder(orderID) == null) {
+			return Response.status(Status.UNAUTHORIZED).build();
 		}
-		return null;
-	}
+		return Response.status(Status.OK).build();
+		/*if (res.equals("OK")) {
+			return Response.status(Status.OK).build();
+		}
+		
+		return null;*/
+			}
+		
+		
+	
 
 
 	

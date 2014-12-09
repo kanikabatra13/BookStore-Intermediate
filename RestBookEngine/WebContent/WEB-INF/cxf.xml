@@ -15,11 +15,12 @@
   <bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
     <bean id="cors-filter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>
       	
-  <jaxrs:server name="BookService" address="http://localhost:8081">
+  <jaxrs:server name="BookService" address="/">
 		<jaxrs:serviceBeans>
 			<ref bean="bookServiceRest" />
+			<ref bean="orderServiceRest" />
 		</jaxrs:serviceBeans>
-		<jaxrs:providers>
+		<jaxrs:providers>S
 			<ref bean="jacksonProvider" />
 			<ref bean="cors-filter" />
 		</jaxrs:providers> 
@@ -27,27 +28,14 @@
 		<jaxrs:schemaLocations>
 			<jaxrs:schemaLocation>com.bookengine.ws.service.representation.BookRequest</jaxrs:schemaLocation>
 			<jaxrs:schemaLocation>com.bookengine.ws.service.representation.BookRepresentation</jaxrs:schemaLocation>
-		</jaxrs:schemaLocations>
-
-	</jaxrs:server>
-  	<bean id="bookServiceRest" class="com.bookengine.ws.service.BookResource" />
-  	
-  	<jaxrs:server name="OrderService" address="http://localhost:8082">
-		<jaxrs:serviceBeans>
-			<ref bean="orderServiceRest" />
-		</jaxrs:serviceBeans>
-		<jaxrs:providers>
-			<ref bean="jacksonProvider" />
-			<ref bean="cors-filter" />
-		</jaxrs:providers> 
-
-		<jaxrs:schemaLocations>
 			<jaxrs:schemaLocation>com.bookengine.ws.service.representation.OrderRequest</jaxrs:schemaLocation>
 			<jaxrs:schemaLocation>com.bookengine.ws.service.representation.OrderRepresentation</jaxrs:schemaLocation>
 		</jaxrs:schemaLocations>
 
 	</jaxrs:server>
-  	<bean id="orderServiceRest" class="com.bookengine.ws.service.OrderResource" />
+  	<bean id="bookServiceRest" class="com.bookengine.ws.service.BookResource" />
+  	
+  	  	<bean id="orderServiceRest" class="com.bookengine.ws.service.OrderResource" />
   
   
 

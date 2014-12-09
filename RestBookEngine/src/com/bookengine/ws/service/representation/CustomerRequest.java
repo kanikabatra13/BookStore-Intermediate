@@ -15,6 +15,8 @@ public class CustomerRequest {
 	private String address;
 	private String phone;
 	private String custId;
+	private String username;
+	private String password;
 	
 public CustomerRequest(){
 		
@@ -52,4 +54,19 @@ public CustomerRequest(){
 		this.custId = custId;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

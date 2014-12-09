@@ -12,6 +12,7 @@ import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 
 import com.bookengine.ws.service.representation.CustomerRequest;
 import com.bookengine.ws.service.representation.OrderRequest;
+import com.bookengine.ws.service.representation.PaymentInfoRequest;
 
 
 public class OrderServiceClient {
@@ -31,7 +32,7 @@ public class OrderServiceClient {
       * POST METHOD invoke
      *****************************************************************************************/
      System.out.println("POST METHOD .........................................................");
-     WebClient postClient = WebClient.create("http://localhost:8082", providers);
+     WebClient postClient = WebClient.create("http://54.88.78.26/ws", providers);
      WebClient.getConfig(postClient).getOutInterceptors().add(new LoggingOutInterceptor());
      WebClient.getConfig(postClient).getInInterceptors().add(new LoggingInInterceptor());
               
@@ -44,12 +45,16 @@ public class OrderServiceClient {
      System.out.println("Client POST METHOD Request Headers:  " + postRequestHeaders);
      OrderRequest orderRequest = new OrderRequest();
      CustomerRequest customerRequest = new CustomerRequest();
+     PaymentInfoRequest paymentinforeq = new PaymentInfoRequest();
      orderRequest.setBookId("X1");
-     customerRequest.setName("John Smith");
+     customerRequest.setName("Kanika Batra");
      customerRequest.setCustId("1234");
      customerRequest.setAddress("312 N State Street, Chicago IL 60611");
      customerRequest.setPhone("312-345-9876");
+     paymentinforeq.setCardType("AMEX");
+     paymentinforeq.setCardNumber("1234-56789-09876");
      orderRequest.setCustomer(customerRequest);
+     orderRequest.setPaymentInfo(paymentinforeq);
      
      
      
@@ -60,7 +65,7 @@ public class OrderServiceClient {
       * GET METHOD invoke
       *****************************************************************************************/
      System.out.println("\nGET METHOD ............................................OrderStatus");
-     WebClient getClient = WebClient.create("http://localhost:8082", providers);
+     WebClient getClient = WebClient.create("http://54.88.78.26/ws", providers);
      
      //Configuring the CXF logging interceptor for the outgoing message
      WebClient.getConfig(getClient).getOutInterceptors().add(new LoggingOutInterceptor());
@@ -68,7 +73,7 @@ public class OrderServiceClient {
      WebClient.getConfig(getClient).getInInterceptors().add(new LoggingInInterceptor());
      
      // change application/xml  to get in xml format
-     getClient = getClient.accept("application/json").type("application/json").path("/orderservice/orderstatus/546");
+     getClient = getClient.accept("application/json").type("application/json").path("/orderservice/order/546");
      
      //The following lines are to show how to log messages without the CXF interceptors
      String getRequestURI = getClient.getCurrentURI().toString();
@@ -84,12 +89,12 @@ public class OrderServiceClient {
       * PUT METHOD invoke
      *****************************************************************************************/
      System.out.println("\nPUT METHOD ......................................................OrderCancel");
-     WebClient putClient = WebClient.create("http://localhost:8082", providers);
+     WebClient putClient = WebClient.create("http://54.88.78.26/ws", providers);
      WebClient.getConfig(putClient).getOutInterceptors().add(new LoggingOutInterceptor());
      WebClient.getConfig(putClient).getInInterceptors().add(new LoggingInInterceptor());
               
      // change application/xml  to application/json get in json format
-     putClient = putClient.accept("application/json").type("application/json").path("/orderservice/ordercancel/782");
+     putClient = putClient.accept("application/json").type("application/json").path("/orderservice/order/782");
   	
      String putRequestURI = putClient.getCurrentURI().toString();
      System.out.println("Client put METHOD Request URI:  " + putRequestURI);
@@ -103,12 +108,12 @@ public class OrderServiceClient {
       * DELETE METHOD invoke
      *****************************************************************************************/
      System.out.println("\nDELETE METHOD .........................................................");
-     WebClient deleteClient = WebClient.create("http://localhost:8082", providers);
+     WebClient deleteClient = WebClient.create("http://54.88.78.26/ws", providers);
      WebClient.getConfig(deleteClient).getOutInterceptors().add(new LoggingOutInterceptor());
      WebClient.getConfig(deleteClient).getInInterceptors().add(new LoggingInInterceptor());
      
      // change application/xml  to application/json get in json format
-     deleteClient = deleteClient.accept("application/json").type("application/json").path("/orderservice/orderdelete/546");
+     deleteClient = deleteClient.accept("application/json").type("application/json").path("/orderservice/546");
   	
      String deleteRequestURI = deleteClient.getCurrentURI().toString();
      System.out.println("Client DELETE METHOD Request URI:  " + deleteRequestURI);

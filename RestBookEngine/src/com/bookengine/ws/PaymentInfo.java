@@ -5,9 +5,14 @@ public class PaymentInfo {
 	private String cardType;
 	private String cardNumber;
 	
-	public PaymentInfo(){
-		cardType = "Visa";
-		cardNumber = "0000-1234-0342-1453";
+	public PaymentInfo()
+	{
+		
+	}
+	
+	public PaymentInfo(String cardType, String cardNumber){
+		this.cardType = cardType;
+		this.cardNumber = cardNumber;
 	}
 
 	public String getCardType() {

@@ -9,13 +9,17 @@ public class BookDAO {
 
 	public BookDAO() {
 	
-			Book book1 = new Book("X1","Web Services","Kanika","567-789", 78.90);
-			Book book2= new Book("X2","XML Programming","Julius","7890-567", 80);
-			Book book3= new Book("X3","Database Programming","Yang","234-890", 100.67);
+			Book book1 = new Book("B1","Web Services","Kanika","567-789", 78.90);
+			Book book2= new Book("B2","XML Programming","Julius","7890-567", 80);
+			Book book3= new Book("B3","Database Programming","Yang","234-890", 100.67);
+			Book book4= new Book("B4","Head First Java","Kathy Sierra","456-190", 120.45);
+			Book book5= new Book("B5","Thinking In Java","Bruce Eckel","234-890", 98.28);
 			
 			books.add(book1);
 			books.add(book2);
 			books.add(book3);
+			books.add(book4);
+			books.add(book5);
 			
 		}
 

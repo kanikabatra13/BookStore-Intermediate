@@ -59,6 +59,8 @@ public class OrderRequest {
 		customer2.setAddress(customerRequest.getAddress());
 		customer2.setName(customerRequest.getName());
 		customer2.setPhone(customerRequest.getPhone());
+		customer2.setUsername(customerRequest.getUsername());
+		customer2.setPassword(customerRequest.getPassword());
 
 		this.customer = customer2;
 	}
@@ -70,6 +72,17 @@ public class OrderRequest {
 		this.paymentinfo = paymentinfo;
 	}
 
+	 public void setPaymentInfo(PaymentInfoRequest paymentInfoRequest)
+	
+	 {
+		 PaymentInfo paymentinfo2 = new PaymentInfo();
+		 paymentinfo2.setCardNumber(paymentInfoRequest.getCardNumber());
+		 paymentinfo2.setCardType(paymentInfoRequest.getCardType());
+		 
+		 this.paymentinfo = paymentinfo2;
+	 }
+	 
+	 
 	public void setBookId(String bookId) {
 		this.bookId = bookId;
 	}

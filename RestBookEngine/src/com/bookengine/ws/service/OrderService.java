@@ -1,7 +1,8 @@
 package com.bookengine.ws.service;
 
 import javax.jws.WebService;
-import javax.xml.ws.Response;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status; 
 
 import com.bookengine.ws.Customer;
 import com.bookengine.ws.Order;
@@ -12,7 +13,7 @@ import com.bookengine.ws.service.representation.OrderRequest;
 public interface OrderService {
 
 	public OrderRepresentation addOrder(OrderRequest orderrequest);
-	public String getOrderStatus(String orderID);
-	public String cancelOrder(String orderID);
-	public String deleteOrder(String orderID);
+	public OrderRepresentation getOrder(String orderID);
+	public Response cancelOrder(String orderID);
+	public Response deleteOrder(String orderID);
 }
